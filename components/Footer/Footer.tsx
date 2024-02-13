@@ -6,10 +6,10 @@ const Footer = () => {
         <div className='w-full'>
             <div className=' container px-5 py-10 border-t mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 text-center md:text-left '>
                 <div>
-                    <h1 className=' text-4xl font-black'>
-                        Meet
-                    </h1>
-                    <p className=' text-yellow-500'>example@gmail.com</p>
+                    <Link className=' font-black text-3xl text-primary' href={"/"}>
+                        meet<span className=' text-yellow-300'>in</span>
+                    </Link>
+                    <p className=' text-yellow-500 mt-5'>example@gmail.com</p>
                 </div>
                 <div className='flex flex-col gap-3 text-sm'>
                     <h1 className=' text-lg font-semibold'>Quick Links</h1>

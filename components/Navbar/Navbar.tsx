@@ -3,13 +3,14 @@ import React from 'react'
 import { Button } from '../ui/button'
 import { ArrowRightCircle } from 'lucide-react'
 import MobileNavbar from './MobileNavbar'
+import GenerateMeet from '../Landing/GenerateMeet'
 
 const Navbar = () => {
     return (
         <header className='w-full p-5'>
-            <div className='  container mx-auto w-full flex items-center justify-between gap-5'>
+            <div className='  container p-0 mx-auto w-full flex items-center justify-between gap-5'>
                 <Link className=' font-black text-3xl text-primary' href={"/"}>
-                    meet
+                    meet<span className=' text-yellow-300'>in</span>
                 </Link>
 
                 <div className='hidden lg:flex items-center gap-5'>
@@ -31,11 +32,7 @@ const Navbar = () => {
                 </div>
 
                 <div className='hidden lg:flex items-center gap-5'>
-                    <Link href={"/"}>
-                        <Button className=' rounded-full'>
-                            Join Now <ArrowRightCircle className=' ml-2 h-4 w-4 ' />
-                        </Button>
-                    </Link>
+                    <GenerateMeet />
                 </div>
                 <div className=' block lg:hidden'>
                     <MobileNavbar />

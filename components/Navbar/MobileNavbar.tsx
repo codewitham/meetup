@@ -21,7 +21,7 @@ const MobileNavbar = () => {
                 <SheetHeader>
                     <SheetTitle>
                         <Link className=' font-black text-3xl text-primary' href={"/"}>
-                            meet
+                            meet<span className=' text-yellow-300'>in</span>
                         </Link>
                     </SheetTitle>
                 </SheetHeader>
