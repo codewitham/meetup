@@ -3,6 +3,7 @@ import Navbar from '../Navbar/Navbar'
 import { Button } from '../ui/button'
 import { ArrowRightCircle, Video } from 'lucide-react'
 import HeroDisplayMedia from './HeroDisplayMedia'
+import GenerateMeet from './GenerateMeet'
 
 const HeroSection = () => {
     return (
@@ -23,9 +24,10 @@ const HeroSection = () => {
                 </div>
 
                 <div className=' flex items-center gap-5 mb-20'>
-                    <Button className=' rounded-full' size={"lg"}>
+                    <GenerateMeet />
+                    {/* <Button className=' rounded-full' size={"lg"}>
                         Join Now <ArrowRightCircle className=' ml-2 h-4 w-4 ' />
-                    </Button>
+                    </Button> */}
                     <Button size={"lg"} className=' rounded-full border-primary' variant={"outline"}>
                         Watch Video <Video className=' ml-2 h-4 w-4' />
                     </Button>
