@@ -41,9 +41,9 @@ const Navbar = () => {
                     </Link>
                 </div>
 
-                <div className='hidden lg:flex items-center gap-5'>
+                <div className=' flex gap-5 items-center'>
                     {!isSignedIn ?
-                        <>
+                        <div className='hidden lg:flex items-center gap-5'>
                             <Link href={"/sign-in"}>
                                 <Button variant={isLinkActive("/sign-in") ? "secondary" : "ghost"}>
                                     Sign In
@@ -55,14 +55,15 @@ const Navbar = () => {
                                     Sign Up
                                 </Button>
                             </Link>
-                        </>
+                        </div>
                         :
                         <UserButton afterSignOutUrl='/sign-in' />
                     }
+                    <div className='block lg:hidden'>
+                        <MobileNavbar />
+                    </div>
                 </div>
-                <div className='block lg:hidden'>
-                    <MobileNavbar />
-                </div>
+
             </div>
         </header>
     )

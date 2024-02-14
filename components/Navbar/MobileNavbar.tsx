@@ -63,10 +63,10 @@ const MobileNavbar = () => {
                         <GenerateMeet />
                     }
                 </div>
-
+                {/* 
                 <div className=' mt-5 border-t pt-5'>
                     <UserButton afterSignOutUrl='/' />
-                </div>
+                </div> */}
             </SheetContent>
         </Sheet>
     )
