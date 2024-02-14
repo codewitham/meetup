@@ -12,7 +12,7 @@ import { Menu } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '../ui/button'
 import { usePathname } from 'next/navigation'
-import { useUser } from '@clerk/nextjs';
+import { UserButton, useUser } from '@clerk/nextjs';
 import GenerateMeet from '../Landing/GenerateMeet';
 
 const MobileNavbar = () => {
@@ -62,6 +62,10 @@ const MobileNavbar = () => {
                         :
                         <GenerateMeet />
                     }
+                </div>
+
+                <div className=' mt-5 border-t pt-5'>
+                    <UserButton afterSignOutUrl='/' />
                 </div>
             </SheetContent>
         </Sheet>
