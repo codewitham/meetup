@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import AuthProvider from "./AuthProvider";
 
 const font = Montserrat({ subsets: ["latin"] });
 
@@ -15,8 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={font.className}>{children}</body>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <body className={font.className}>{children}</body>
+      </html>
+    </AuthProvider>
   );
 }

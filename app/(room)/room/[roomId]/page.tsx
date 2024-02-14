@@ -1,8 +1,11 @@
 'use client';
+import { useUser } from '@clerk/nextjs';
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 import React from 'react'
 
 const page = ({ params }: { params: { roomId: string } }) => {
+    const { user } = useUser();
+
     function randomID(len: number) {
         let result = '';
         if (result) return result;
@@ -28,7 +31,7 @@ const page = ({ params }: { params: { roomId: string } }) => {
         // wss://webliveroom2051687189-api-bak.coolzcloud.com/ws
 
         const serverSecret = "898dc209bd9c99ffc7f48e32eecb627a";
-        const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, params.roomId, randomID(5), randomID(5));
+        const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, params.roomId, randomID(5), user?.fullName || "");
 
         // Create instance object from Kit Token.
         const zp = ZegoUIKitPrebuilt.create(kitToken);

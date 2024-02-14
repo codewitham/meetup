@@ -1,3 +1,4 @@
+'use client';
 import React from 'react'
 import {
     Sheet,
@@ -10,8 +11,18 @@ import {
 import { Menu } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '../ui/button'
+import { usePathname } from 'next/navigation'
+import { useUser } from '@clerk/nextjs';
+import GenerateMeet from '../Landing/GenerateMeet';
 
 const MobileNavbar = () => {
+    const { isSignedIn, user, isLoaded } = useUser();
+    const path = usePathname();
+
+    const isLinkActive = (href: string) => {
+        return path === href;
+    }
+
     return (
         <Sheet>
             <SheetTrigger>
@@ -27,14 +38,30 @@ const MobileNavbar = () => {
                 </SheetHeader>
                 <div className=' flex flex-col mt-10'>
                     <Link className=' w-full' href={"/"}>
-                        <Button variant={"secondary"} className=' justify-start w-full'>Home</Button>
+                        <Button variant={isLinkActive("/") ? "secondary" : "ghost"} className=' justify-start w-full'>Home</Button>
                     </Link>
-                    <Link className=' w-full' href={"/"}>
-                        <Button variant={"ghost"} className='justify-start w-full'>About</Button>
+                    <Link className=' w-full' href={"/about"}>
+                        <Button variant={isLinkActive("/about") ? "secondary" : "ghost"} className='justify-start w-full'>About</Button>
                     </Link>
-                    <Link className=' w-full' href={"/"}>
-                        <Button variant={"ghost"} className='justify-start  w-full'>Contact</Button>
+                    <Link className=' w-full' href={"/contact"}>
+                        <Button variant={isLinkActive("/contact") ? "secondary" : "ghost"} className='justify-start  w-full'>Contact</Button>
                     </Link>
+                </div>
+
+
+                <div className=' pt-5 mt-5 border-t'>
+                    {!isSignedIn ?
+                        <>
+                            <Link className=' w-full' href={"/sign-in"}>
+                                <Button variant={isLinkActive("/sign-in") ? "secondary" : "ghost"} className='justify-start  w-full'>Sign In</Button>
+                            </Link>
+                            <Link className=' w-full' href={"/sign-up"}>
+                                <Button variant={isLinkActive("/sign-up") ? "secondary" : "ghost"} className='justify-start  w-full'>Sign Up</Button>
+                            </Link>
+                        </>
+                        :
+                        <GenerateMeet />
+                    }
                 </div>
             </SheetContent>
         </Sheet>
