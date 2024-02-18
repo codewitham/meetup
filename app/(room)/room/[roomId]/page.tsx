@@ -38,18 +38,19 @@ const page = ({ params }: { params: { roomId: string } }) => {
         // start the call
         zp.joinRoom({
             container: element,
-            // sharedLinks: [
-            //     {
-            //         name: 'Personal link',
-            //         url:
-            //             window.location.protocol + '//' +
-            //             window.location.host + window.location.pathname +
-            //             '?roomID=' +
-            //             params.roomId,
-            //     },
-            // ],
+            sharedLinks: [
+                {
+                    name: 'Personal link',
+                    url:
+                        window.location.protocol + '//' +
+                        window.location.host + window.location.pathname +
+                        '?roomID=' +
+                        params.roomId,
+                },
+            ],
             scenario: {
                 mode: ZegoUIKitPrebuilt.VideoConference,
+
             },
         });
     };
