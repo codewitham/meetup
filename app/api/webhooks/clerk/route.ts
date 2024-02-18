@@ -59,12 +59,12 @@ export async function POST(req: Request) {
 
     // CREATE
     if (eventType === "user.created") {
-        const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
+        const { id, email_addresses, image_url, first_name } = evt.data;
 
         const user: createUser = {
             clerkId: id,
             email: email_addresses[0].email_address,
-            name: first_name + last_name,
+            name: first_name,
             imageUrl: image_url,
         };
 
@@ -84,11 +84,11 @@ export async function POST(req: Request) {
 
     // UPDATE
     if (eventType === "user.updated") {
-        const { id, image_url, first_name, last_name } = evt.data;
+        const { id, image_url, first_name } = evt.data;
 
         const user = {
             id: id,
-            name: first_name + last_name,
+            name: first_name,
             imageUrl: image_url,
         };
 
