@@ -1,67 +1,39 @@
-'use client';
-import { useUser } from '@clerk/nextjs';
-import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
+import Room from '@/components/Room/Room';
+import { toast } from '@/components/ui/use-toast';
+import { getUserById } from '@/lib/actions/users.actions';
+import { getSingleWebinar } from '@/lib/actions/webinar.actions';
+import moment from 'moment';
+import { redirect } from 'next/navigation';
 import React from 'react'
 
-const page = ({ params }: { params: { roomId: string } }) => {
-    const { user } = useUser();
+const page = async ({ params }: { params: { roomId: string } }) => {
+    const { user } = await getUserById();
 
-    function randomID(len: number) {
-        let result = '';
-        if (result) return result;
-        var chars = '12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCZXASDQWERTYHGFUIOLKJP',
-            maxPos = chars.length,
-            i;
-        len = len || 5;
-        for (i = 0; i < len; i++) {
-            result += chars.charAt(Math.floor(Math.random() * maxPos));
-        }
-        return result;
+    if (!user) {
+        return redirect("/sign-up");
     }
 
+    const { webinar } = await getSingleWebinar(params.roomId);
 
-    const myMeeting = async (element: any) => {
+    if (!webinar) {
+        return redirect("/");
+    }
 
-        // generate Kit Token
-        const appID = 2051687189;
-        // app sign = bb58b02b55b9b8337fb8798cfa64db2f0850278254cd605cefe87e101e23be37
-        // calllback = bb58b02b55b9b8337fb8798cfa64db2f
+    // if (webinar.datetime > new Date()) {
 
-        // wss://webliveroom2051687189-api.coolzcloud.com/ws
-        // wss://webliveroom2051687189-api-bak.coolzcloud.com/ws
+    //     console.log("error: not started yet.");
 
-        const serverSecret = "898dc209bd9c99ffc7f48e32eecb627a";
-        const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, params.roomId, randomID(5), user?.fullName || "");
-
-        // Create instance object from Kit Token.
-        const zp = ZegoUIKitPrebuilt.create(kitToken);
-        // start the call
-        zp.joinRoom({
-            container: element,
-            sharedLinks: [
-                {
-                    name: 'Personal link',
-                    url:
-                        window.location.protocol + '//' +
-                        window.location.host + window.location.pathname +
-                        '?roomID=' +
-                        params.roomId,
-                },
-            ],
-            scenario: {
-                mode: ZegoUIKitPrebuilt.VideoConference,
-
-            },
-        });
-    };
+    //     toast({ title: "Starts on", description: `${moment(webinar.datetime).fromNow()}` });
+    //     return redirect("/");
+    // }
 
     return (
-        <div
-            className="myCallContainer"
-            ref={myMeeting}
-            style={{ width: '100vw', height: '100vh' }}
-        ></div>
+        <Room room={webinar} user={user} />
     )
 }
 
 export default page
+
+
+//Type '{ room: { Join: { userId: string; }[]; } & { id: string; title: string; description: string; datetime: Date; maxPersons: number; organizerId: string; isPaid: boolean; thumbnail: string; }; user: { ...; }; }' is not assignable to type 'IntrinsicAttributes & { roomId: Webinar; user: User; }'.
+// Property 'room' does not exist on type 'IntrinsicAttributes & { roomId: Webinar; user: User; }'.

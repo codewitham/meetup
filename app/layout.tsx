@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./AuthProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const font = Montserrat({ subsets: ["latin"] });
 
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <html lang="en">
-        <body className={font.className}>{children}</body>
+        <body className={font.className}>{children}
+          <Toaster />
+        </body>
       </html>
     </AuthProvider>
   );

@@ -7,6 +7,7 @@ import { ArrowRightCircle } from 'lucide-react'
 import MobileNavbar from './MobileNavbar'
 import GenerateMeet from '../Landing/GenerateMeet'
 import { UserButton, useUser } from '@clerk/nextjs';
+import UserBox from '../User/UserBox';
 
 const Navbar = () => {
     const path = usePathname();
@@ -57,8 +58,10 @@ const Navbar = () => {
                             </Link>
                         </div>
                         :
-                        <UserButton afterSignOutUrl='/sign-in' />
+                        <UserBox />
                     }
+
+
                     <div className='block lg:hidden'>
                         <MobileNavbar />
                     </div>

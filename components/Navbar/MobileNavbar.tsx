@@ -25,8 +25,10 @@ const MobileNavbar = () => {
 
     return (
         <Sheet>
-            <SheetTrigger>
-                <Menu className=' h-4 w-4' />
+            <SheetTrigger asChild>
+                <Button variant={"ghost"} size={"icon"}>
+                    <Menu className=' h-4 w-4' />
+                </Button>
             </SheetTrigger>
             <SheetContent>
                 <SheetHeader>

@@ -75,3 +75,21 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+
+.react-datetime-picker__calendar .react-calendar {
+  border-width: thin;
+  background: #fff;
+  padding: 5px;
+}
+
+.react-datetime-picker__wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  border: thin solid gray;
+  border: none;
+  border: 1px solid #ddd;
+  @apply rounded-md p-1;
+}

@@ -1,4 +1,5 @@
 'use server';
+import { currentUser } from "@clerk/nextjs/server";
 import prisma from "../db";
 
 export async function createUser(createUser: createUser) {
@@ -33,10 +34,11 @@ export async function deleteUser(id: string) {
     }
 }
 
-export async function getUserById(userId: string) {
+export async function getUserById() {
     try {
-        const user = await prisma.user.delete({ where: { clerkId: userId } });
-        return { message: "user fetched!!", user: user }
+        const user = await currentUser();
+        const getUser = await prisma.user.findUnique({ where: { clerkId: user?.id } });
+        return { message: "user fetched!!", user: getUser }
     } catch (error) {
         console.log(error);
         return { error: "server error!" }

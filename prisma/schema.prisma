@@ -11,9 +11,34 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
-  clerkId  String @unique
+  id       String    @id @default(uuid())
+  clerkId  String    @unique
   name     String
-  email    String @unique
+  email    String    @unique
   imageUrl String
+  Webinar  Webinar[]
+  Join     Join[]
+}
+
+model Webinar {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  datetime    DateTime
+  maxPersons  Int
+  organizerId String
+  organizer   User     @relation(fields: [organizerId], references: [id])
+  isPaid      Boolean
+  thumbnail   String
+  Join        Join[]
+}
+
+model Join {
+  id        String  @id @default(uuid())
+  webinarId String
+  webinar   Webinar @relation(fields: [webinarId], references: [id])
+  userId    String
+  user      User    @relation(fields: [userId], references: [id])
+
+  @@unique([webinarId, userId])
 }
