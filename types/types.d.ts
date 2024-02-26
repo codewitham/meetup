@@ -27,6 +27,7 @@ interface Webinar {
     maxPersons: number;
     organizerId: string;
     isPaid: boolean;
+    Join: any[];
     thumbnail: string;
 }
 
